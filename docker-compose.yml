@@ -1,0 +1,48 @@
+# Elias Barbosa maintained docker-compose.yml file.
+# Creates multiple Drupal web apps sharing the same MySQL database
+# Usage: docker-compose up -d
+version: '2'
+services:
+  drupal:
+    build:
+      context: ./setup/builds/drupal-apache
+    image: drupal:8.2.3-apache
+    volumes:
+      - ./html/:/html/
+      - ./setup/scripts/php.ini:/usr/local/etc/php/php.ini
+      - ./html/modules:/var/www/html/modules
+      - ./html/profiles:/var/www/html/profiles
+      - ./html/themes:/var/www/html/themes
+    volumes_from:
+      - mariadb
+    ports:
+      - "8081:80"
+    links:
+      - mariadb
+      - phpmyadmin
+    restart: always
+  mariadb:
+    build:
+      context: ./setup/builds/mariadb
+    image: mariadb
+    ports:
+        - '3307:3306'
+    volumes:
+      - ./database/:/root/mysql/
+      - /var/lib/mysql
+      - /usr/bin
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=drupal
+      - MYSQL_USER=drupal
+      - MYSQL_PASSWORD=drupal
+    restart: always
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - '8091:80'
+    links:
+      - mariadb
+    restart: always
