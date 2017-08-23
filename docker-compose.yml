@@ -6,7 +6,7 @@ services:
   drupal:
     build:
       context: ./setup/builds/drupal-apache
-    image: drupal:8.2.3-apache
+    image: eliasny/drupal-open-social:8.3.5-apache
     volumes:
       - ./html/:/html/
       - ./setup/scripts/php.ini:/usr/local/etc/php/php.ini

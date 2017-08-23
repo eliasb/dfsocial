@@ -1,9 +1,9 @@
-# **How To Drupal 8 Open Social Distribution**
+# **Drupal 8 Open Social Distribution In Docker**
 
 **Description**
 -------------
 
-This is a Drupal 8 Development Environment using only the Official Docker Images. This Docker-Compose Project includes **Drupal 8**, **Drupal Console**, **Composer**, **Drush**, and **PHPMyAdmin**. It will also have Volumes configured in a way that will allow you to use your favorite IDE such as **Eclipse PDT**. The HTML files as well as the database are backed up in the folder that you will create for each of your clients.
+This is a Drupal 8 Open Social Distribution Development Environment using mostly Official Docker Images with the exception for the **"eliasny/drupal-open-social:8.3.5-apache"** image since there are no official **"Open Social"** Docker Images. This Docker-Compose Project includes **Drupal 8 Open Social Distribution**, **Drupal Console**, **Composer**, **Drush**, and **PHPMyAdmin**. It will also have Volumes configured in a way that will allow you to use your favorite IDE such as **Eclipse PDT**. The HTML files as well as the database are backed up in the folder that you will create for each of your clients.
 
 ----------
 
@@ -75,7 +75,7 @@ The above command should output the following:
 
 Now that we are sure to be in the right location we can finally clone this repository like so:
 
-    $ git clone https://github.com/eliasb/dfdocker.git ./
+    $ git clone https://github.com/eliasb/dfsocial.git ./
 
 After issuing the above command you may be prompted to login to your GitHub account. The above command will simply download all the necessary files and folder structure into your client's folder.
 
