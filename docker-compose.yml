@@ -9,8 +9,8 @@ services:
     image: 'eliasny/drupal-open-social:8.3.7-apache'
     volumes:
       - ./html/:/html/
-      - ./html/modules:/var/www/html/modules
-      - ./html/themes:/var/www/html/themes
+      - ./html/modules/custom:/var/www/html/modules/custom
+      - ./html/themes/custom:/var/www/html/themes/custom
       - ./setup/scripts/php.ini:/usr/local/etc/php/php.ini
     ports:
       - "8081:80"
