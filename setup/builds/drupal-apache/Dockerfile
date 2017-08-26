@@ -1,5 +1,5 @@
 #docker build .
-FROM drupal:8.2.3-apache
+FROM eliasny/drupal-open-social:8.3.7-apache
 
 MAINTAINER Elias Barbosa <info@eb8.com>
 
