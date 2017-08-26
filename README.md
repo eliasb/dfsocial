@@ -3,15 +3,15 @@
 **Description**
 -------------
 
-This is a Drupal 8 Open Social Distribution Development Environment using mostly Official Docker Images with the exception of the **"eliasny/drupal-open-social:8.3.5-apache"** image since there are no official **"Open Social"** Docker Images. This Docker-Compose Project includes **Drupal 8 Open Social Distribution**, **Drupal Console**, **Composer**, **Drush**, and **PHPMyAdmin**. It will also have Volumes configured in a way that will allow you to use your favorite IDE such as **Eclipse PDT**. The HTML files as well as the database are backed up in the folder that you will create for each of your clients.
+This is a Drupal 8 Open Social Distribution Development Environment using mostly Official Docker Images with the exception for the **"eliasny/drupal-open-social:8.3.5-apache"** image since there are no official **"Open Social"** Docker Images. This Docker-Compose Project includes **Drupal 8 Open Social Distribution**, **Drupal Console**, **Composer**, **Drush**, and **PHPMyAdmin**. It will also have Volumes configured in a way that will allow you to use your favorite IDE such as **Eclipse PDT**. The HTML files as well as the database are backed up in the folder that you will create for each of your clients.
 
 ----------
 
 ## **1. Install Docker Toolbox**
 
-If you don't have Docker installed in your computer yet, I'd recommend that you start with Docker Toolbox. This is a set of tools that include a tool called Kitematic, which will make your first experience with Docker much easier. Docker Toolbox is available for Windows or Mac and it will create a small VirtualBox VM that will allow Docker to run in your computer without much hassle.
+If you don't have Docker installed in your computer yet, I'd recommend that you start with Docker Toolbox. This is a set of tools that includes a tool called Kitematic which will make your first experience with Docker much easier. Docker Toolbox is available for Windows or Mac and it will create a small VirtualBox VM that will allow Docker to run in your computer without much hassle.
 
-My first experience with Kitematic was a little disappointing. I felt a little like I was riding a bicycle with soldered training wheels. I was mistaken. Once I got a little more experienced with Docker, I realized that I could access the back-end of Kitematic with a Terminal window and use Kitematic in combination with it.
+My first experience with Kitematic was a little disappointing. I felt a little like I was riding a bicycle with soldered training wheels. I was mistaken. Once I got a little more experienced with Docker I realized that I could access the back-end of Kitematic with a Terminal window and use Kitematic in combination with it.
 
 [https://www.docker.com/products/docker-toolbox](https://www.docker.com/products/docker-toolbox)
 
@@ -25,7 +25,7 @@ You can use this Docker project in any way you see fit. However, I have created 
 
 The first thing that I did after installing Kitematic was to go to my **"C:\\\Users\\[My User Name]"** folder and create a folder called **"D"** for **"Docker"**. This folder will be the storage place for all my clients. 
 
-Whenever I get a new client, I go to the **"D"** folder and create a new folder for that client. I use my client's domain name as the name of that folder. If, for example, my client has a domain name **"example.com"**, I call this client's folder as **"example"**. I could use **".com"** as part of the folder's name but I try to keep this folder name as small as possible. The folder name will be used by Docker when creating the Containers so, keeping this name short will make the container names much more readable. There is also another reason. Windows has a limitation for the length of file paths. The file path cannot be longer than **"256 characters"**. For this reason, keeping the base folder names small should always be at the top of our priorities.
+Whenever I get a new client, I go the **"D"** folder and create a new folder for that client. I use my client's domain name as the name of that folder. If, for example, my client has a domain name **"example.com"**, I call this client's folder as **"example"**. I could use **".com"** as part of the folder's name but I try to keep this folder name as small as possible. The folder name will be used by Docker when creating the Containers so, keeping this name short will make the container names much more readable. There is also another reason. Windows has a limitation for the length of file paths. The file path cannot be longer than **"256 characters"**. For this reason, keeping the base folder names small should always be at the top of our priorities.
 
     C:\\Users\[My User Name]\D\example
 
@@ -89,15 +89,15 @@ Now that you have downloaded this repository, you will need to use a tool called
 
 The above command will initiate a long process that should take about 5 minutes to complete on the first time you run it. Just be patient. The above command will execute the following tasks:
 
- 1. Download all the necessary Docker Images
- 2. Make a copy of the **"Open Social"**, the **"MariaDB"** and the **"PHPMyAdmin"** images
- 3. Creates a **"CronTab"** entry in the new **"Open Social"** image
- 4. Install **"Cron"**, **"RSYNC"** and creates a **"CronTab"** entry in the new **"MariaDB"** image
+ 1. Download all the Docker Images necessary
+ 2. Make a copy of the **"Drupal"** and the **"MariaDB"** images
+ 3. Install **"Composer"**, **"Drupal Console"**, **"Drush"**, **"Cron"**, and **"RSYNC"** in the new **"Drupal"** image
+ 4. Install **"Cron"**, and **"RSYNC"** in the new **"MariaDB"** image
  5. Start all containers
 
 ## **5. Start Cron**
 
-**"Cron"** is a little program that I installed inside the  **"Open Social"** and the **"MariaDB"** containers. This little program will run a backup of your website and your database. This backup will be located inside your client's folder.
+**"Cron"** is a little program that I installed inside the  **"Drupal"** and the **"MariaDB"** containers. This little program will run a backup of your website and your database. This backup will be located inside your client's folder.
 
 You should always start **"Cron"** every time you start **"Kitematic"**. This will assure that you will have an up to date backup of your website & database. If, God forbid, you accidentally delete the containers, you can always recreate them with "Docker-Compose" but your client's files will be protected.
 
@@ -110,20 +110,21 @@ The above command will output something like the following:
     CONTAINER ID IMAGE     COMMAND    CREATED   STATUS    PORTS    NAMES
     bbcc3039375f drupal... "apache... 2 days... Up Abo... 0.0.0... example_drupal_1
     23ee726d813a phpmya... "/run.s... 2 days... Up Abo... 0.0.0... example_phpmyadmin_1
+    08d1192caec0 busybo... "sh"       2 days... Up Abo...          example_data_1
     176b2d5475d4 mariad... "docker... 2 days... Up Abo... 0.0.0... example_mariadb_1
 
-The name of your containers should be at the last column. In my case the **"Open Social"** container was called **"example_drupal_1"** because **"example"** is the name of my client's folder. Consequently, my **"MariaDB"** container is called **"example_mariadb_1"**.
+The name of your containers should be at the last column. In my case the **"Drupal"** container was called **"example_drupal_1"** because **"example"** is the name of my client's folder. Consequently, my **"MariaDB"** container is called **"example_mariadb_1"**.
 
 Now that we know the name of your two containers, we can issue the following two commands in order to run **"Cron"** and start the backups.
 
     $ docker exec -it example_drupal_1 bash /usr/sbin/service cron start
     $ docker exec -it example_mariadb_1 bash /usr/sbin/service cron start
 
-## **6. Installing Drupal 8 From Within Kitematic**
+## **6. Installing Drupal 8 Open Social From Within Kitematic**
 
 Now you are done with the terminal commands. It is time to switch to the **"Kitematic"** interface.
 
-1. From there you will see on the left-hand-side a list of your running containers. You should click on the container for **"Open Social"** which should have a name similar to **"example_drupal_1"**. You will see a bunch of stuff on the middle window. There is nothing for you to worry about. 
+1. From there you will see on the left-hand-side a list of your running containers. You should click on the container for **"Drupal"** which should have a name similar to **"example_drupal_1"**. You will see a bunch of stuff on the middle window. There is nothing for you to worry about. 
 2. Look to the right-hand-side and you will be able to see a small window with a familiar appearance. There should be a small screenshot of a Drupal 8 Installation screen. Click on that small screenshot. This will bring up your default Browser with the first screen for the Drupal 8 installation. 
 3. Follow the Standard installation and, when prompted for the Database information you should use the following credentials: 
 	- Database Name: **drupal**
@@ -134,15 +135,15 @@ Now you are done with the terminal commands. It is time to switch to the **"Kite
 6. Click on the **"Settings"** tab that should be on the top right-hand-side
 7. Now click on the **"Ports"** sub-tab. There you will be able to see the Database **"IP Number"** and the Port Number
 8. Copy the **"IP Number"** into the Database Server field and the **"Ports"** number into the database port number
-9. Proceed with the rest of the installation as normal
+9. After waiting for a while for the progression bar, you will get to the "Configure site" page. The top part of this page is similar to any other Drupal 8 installation. However, the bottom part shows a list of modules and features that relates to the Open Social Distribution. I am referring to the section entitled **"OPEN SOCIAL OPTIONAL CONFIGURATION"**. I could enumerate each feature here but, suffice it to say, they are useful features and you should install them. Do a test drive. You can always disable them afterwards. In this case, you should check-mark all the options from this section.
 
 ## **7. How To Use Drush, Composer, And Drupal Console**
 
-I am starting from the premise that you have the **"Open Social"** container up and running. You could issue a **"Drush"** or a **"Composer"** command from outside of the container. However, I find that the most convenient way to execute these commands is by entering into the **"Open Social"** container inside a bash terminal. To do that you execute the following command:
+I am starting from the premise that you have the **"Drupal"** container up and running. You could issue a **"Drush"** or a **"Composer"** command from outside of the container. However, I find that the most convenient way to execute these commands is by entering into the **"Drupal"** container inside a bash terminal. To do that you execute the following command:
 
-    $ docker exec -i -t example_drupal_1 bash
+    $ docker exec -it example_drupal_1 bash
 
-Of course, you should replace the word **"example"** with the correct name of your **"Open Social"** container as I describe on step **"5. Start Cron"**!
+Of course, you should replace the word **"example"** with the correct name of your **"Drupal"** container as I describe on step **"5. Start Cron"**!
 
 ## **8. How To Use PHPMyAdmin Within Kitematic**
 
@@ -168,7 +169,7 @@ There is only one potential problem. If you plan on running the containers from 
 
 You will have to make a few small changes on the **docker-compose.yml** file. You will have to change the ports for 3 of the containers in order to be able to create your new client's containers. It is very simple, though! Just redo the step **"3. Use Git To Clone This Repo"** inside of your new client's folder. Once you have downloaded this Repository, edit the file **docker-compose.yml** with your favorite text editor.
 
-First you should change the **Port Number** for the **"Open Social"** container. Go to line 19 where you should see the following:
+First you should change the **Port Number** for the **"Drupal"** container. Go to line 16 where you should see the following:
 
       - "8081:80"
 
@@ -176,7 +177,7 @@ You should replace the number **"8081"** with another number. It can be the next
 
       - "8082:80"
  
-Now is time to do the same for the **"MariaDB"** container. Go to line 29 and you will see something like the following:
+Now is time to do the same for the **"MariaDB"** container. Go to line 23 and you will see something like the following:
 
       - '3307:3306'
 
@@ -184,7 +185,7 @@ Replace the number **"3307"** with another number. This line should, then, look 
 
       - '3308:3306'
 
-Finally, do the same for the **"PHPMyAdmin"** container. Go to line 45 and you will see something like the following:
+Finally, do the same for the **"PHPMyAdmin"** container. Go to line 39 and you will see something like the following:
 
       - '8091:80'
 

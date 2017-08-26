@@ -13,7 +13,7 @@ services:
       - ./html/themes/custom:/var/www/html/themes/custom
       - ./setup/scripts/php.ini:/usr/local/etc/php/php.ini
     ports:
-      - "8081:80"
+      - '8081:80'
     restart: always
   mariadb:
     build:
