@@ -6,20 +6,14 @@ services:
   drupal:
     build:
       context: ./setup/builds/drupal-apache
-    image: eliasny/drupal-open-social:8.3.7-apache
+    image: 'eliasny/drupal-open-social:8.3.7-apache'
     volumes:
       - ./html/:/html/
-      - ./setup/scripts/php.ini:/usr/local/etc/php/php.ini
       - ./html/modules:/var/www/html/modules
-      - ./html/profiles:/var/www/html/profiles
       - ./html/themes:/var/www/html/themes
-    volumes_from:
-      - mariadb
+      - ./setup/scripts/php.ini:/usr/local/etc/php/php.ini
     ports:
       - "8081:80"
-    links:
-      - mariadb
-      - phpmyadmin
     restart: always
   mariadb:
     build:
